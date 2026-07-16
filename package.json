@@ -1,6 +1,6 @@
 {
   "name": "bhasha-switch",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "One-line UI translation overlay for English + all Indian regional languages. Google Translate engine, hidden chrome, themeable dropdown, localStorage persistence.",
   "main": "src/index.js",
   "unpkg": "src/index.js",

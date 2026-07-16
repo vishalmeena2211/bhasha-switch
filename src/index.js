@@ -198,6 +198,9 @@
     if (current && current !== opts.source) writeGoogtrans(opts.source, current);
 
     function boot() {
+      // Idempotent: survive double-init (e.g. React StrictMode) — never stack widgets.
+      var existing = document.querySelectorAll('.bhasha-switch');
+      for (var i = 0; i < existing.length; i++) existing[i].remove();
       injectHideCss();
       injectGoogle(opts.source);
       renderWidget(opts, current, applyLanguage);
