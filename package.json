@@ -1,0 +1,34 @@
+{
+  "name": "bhasha-switch",
+  "version": "0.1.0",
+  "description": "One-line UI translation overlay for English + all Indian regional languages. Google Translate engine, hidden chrome, themeable dropdown, localStorage persistence.",
+  "main": "src/index.js",
+  "unpkg": "src/index.js",
+  "jsdelivr": "src/index.js",
+  "files": ["src", "README.md", "LICENSE"],
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": [
+    "i18n",
+    "translation",
+    "indian-languages",
+    "google-translate",
+    "widget",
+    "localization",
+    "hindi",
+    "tamil",
+    "regional-languages"
+  ],
+  "author": "Vishal Meena <meenavishal2211@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/vishalmeena2211/bhasha-switch#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vishalmeena2211/bhasha-switch.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vishalmeena2211/bhasha-switch/issues"
+  },
+  "sideEffects": false
+}

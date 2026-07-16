@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DigiStay — Folio (bhasha-switch demo)</title>
+<style>
+  *{box-sizing:border-box;}
+  body{font-family:Inter,-apple-system,Segoe UI,Roboto,sans-serif;margin:0;background:#f4f5f7;color:#1a1f36;}
+  .topbar{background:#1a1f36;color:#fff;padding:14px 24px;font-size:16px;font-weight:600;}
+  .wrap{max-width:860px;margin:24px auto;background:#fff;border-radius:10px;box-shadow:0 1px 4px rgba(0,0,0,.08);overflow:hidden;}
+  .hdr{padding:20px 24px;border-bottom:1px solid #e6e8ec;display:flex;justify-content:space-between;}
+  .muted{color:#6b7280;font-size:13px;}
+  .status{display:inline-block;padding:3px 10px;border-radius:12px;background:#e7f6ec;color:#1a7f45;font-size:12px;font-weight:600;}
+  section{padding:20px 24px;border-bottom:1px solid #e6e8ec;}
+  h2{font-size:14px;text-transform:uppercase;letter-spacing:.04em;color:#6b7280;margin:0 0 12px;}
+  table{width:100%;border-collapse:collapse;font-size:14px;}
+  th{text-align:left;color:#6b7280;font-weight:500;padding:6px 0;border-bottom:1px solid #e6e8ec;}
+  td{padding:8px 0;border-bottom:1px solid #f0f1f3;}
+  td.amt,th.amt{text-align:right;font-variant-numeric:tabular-nums;}
+  .totals{display:flex;justify-content:flex-end;}
+  .totals table{width:320px;}
+  .totals td{border:none;padding:5px 0;}
+  .grand td{font-weight:700;font-size:16px;border-top:2px solid #1a1f36;padding-top:10px;}
+  .due{color:#c0392b;font-weight:700;}
+  .btns{padding:20px 24px;display:flex;gap:12px;}
+  button{padding:10px 18px;border-radius:8px;border:none;font-size:14px;font-weight:600;cursor:pointer;}
+  .primary{background:#2563eb;color:#fff;}
+  .ghost{background:#f0f1f3;color:#1a1f36;}
+</style>
+</head>
+<body>
+  <div class="topbar">DigiStay — Front Desk</div>
+  <div class="wrap">
+    <div class="hdr">
+      <div>
+        <div style="font-size:18px;font-weight:700;">Folio — Reservation #DS-48213</div>
+        <div class="muted">Guest: Ramesh Kumar &nbsp;•&nbsp; Room 204 (Deluxe King)</div>
+        <div class="muted">Check-in: 14 Jul 2026 &nbsp;•&nbsp; Check-out: 16 Jul 2026 &nbsp;•&nbsp; 2 Nights</div>
+      </div>
+      <div><span class="status">Checked In</span></div>
+    </div>
+    <section>
+      <h2>Room Charges &amp; Add-ons</h2>
+      <table>
+        <thead><tr><th>Description</th><th>Date</th><th class="amt">Qty</th><th class="amt">Amount</th></tr></thead>
+        <tbody>
+          <tr><td>Deluxe King — Nightly Rate</td><td>14 Jul 2026</td><td class="amt">1</td><td class="amt">₹4,500.00</td></tr>
+          <tr><td>Deluxe King — Nightly Rate</td><td>15 Jul 2026</td><td class="amt">1</td><td class="amt">₹4,500.00</td></tr>
+          <tr><td>Breakfast Buffet (Add-on)</td><td>15 Jul 2026</td><td class="amt">2</td><td class="amt">₹800.00</td></tr>
+          <tr><td>Airport Pickup (Additional Charge)</td><td>14 Jul 2026</td><td class="amt">1</td><td class="amt">₹1,200.00</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Tax Breakup</h2>
+      <table><tbody>
+        <tr><td>Taxable Value</td><td class="amt">₹11,000.00</td></tr>
+        <tr><td>CGST @ 6%</td><td class="amt">₹660.00</td></tr>
+        <tr><td>SGST @ 6%</td><td class="amt">₹660.00</td></tr>
+      </tbody></table>
+    </section>
+    <section class="totals">
+      <table>
+        <tr><td>Subtotal</td><td class="amt">₹11,000.00</td></tr>
+        <tr><td>Total Tax</td><td class="amt">₹1,320.00</td></tr>
+        <tr><td>Advance Paid</td><td class="amt">−₹5,000.00</td></tr>
+        <tr class="grand"><td>Balance Due</td><td class="amt due">₹7,320.00</td></tr>
+      </table>
+    </section>
+    <div class="btns">
+      <button class="primary">Collect Payment</button>
+      <button class="ghost">Add Charge</button>
+      <button class="ghost">Check Out</button>
+      <button class="ghost">Print Invoice</button>
+    </div>
+  </div>
+
+  <!-- ↓↓↓ the entire integration: one script + one init call ↓↓↓ -->
+  <script src="./src/index.js"></script>
+  <script>
+    BhashaSwitch.init({
+      position: 'top-right',
+      accent: '#2563eb',
+      radius: '12px'
+    });
+  </script>
+</body>
+</html>
