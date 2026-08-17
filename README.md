@@ -146,7 +146,9 @@ English plus every Indian language the translation engine supports:
 | کٲشُر Kashmiri | कोंकणी Konkani | डोगरी Dogri | मैथिली Maithili |
 | भोजपुरी Bhojpuri | ꯃꯤꯇꯦꯏ ꯂꯣꯟ Manipuri | ᱥᱟᱱᱛᱟᱲᱤ Santali | |
 
-> Bodo (`brx`) is intentionally omitted — the translation engine has no model for it yet.
+> Bodo (`brx`) is omitted in the default Google engine (no model for it) — but
+> available with the custom Sarvam engine (see below), which covers all 22
+> scheduled languages.
 
 Want only a few? Pass your own list:
 
@@ -161,6 +163,49 @@ BhashaSwitch.init({
 ```
 
 ---
+
+## 🇮🇳 Custom engine (Sarvam) + glossary
+
+The Google widget is great for instant reach, but it has two hard limits: no
+control over *how* things translate (a hotel app's "Property" becomes जायदाद —
+the real-estate sense), and no Bodo. The **custom engine** fixes both: the
+widget translates through *your* server endpoint, with a glossary that pins
+brand names, acronyms, and domain jargon.
+
+```js
+BhashaSwitch.init({
+  engine: 'custom',
+  translateUrl: '/api/translate',   // your server endpoint (see below)
+  glossary: {
+    doNotTranslate: ['GST', 'UPI', 'MyBrand'],       // pass through verbatim
+    terms: {
+      // approved per-language renderings — the MT engine never sees these
+      'Property': { hi: 'प्रॉपर्टी', ta: 'ப்ராபர்ட்டி' },
+      'Check-in': { hi: 'चेक-इन' }
+    }
+  }
+});
+```
+
+**Endpoint contract** — `POST translateUrl` with `{ target: 'hi', texts: ['...'] }`,
+respond `{ results: { '<source>': { t: '<translation>' } } }`. A zero-dependency
+reference implementation backed by **Sarvam AI's `sarvam-translate:v1`** (all 22
+scheduled Indian languages — including Bodo, which the Google engine can't do)
+is included at [`examples/sarvam-server.js`](./examples/sarvam-server.js):
+
+```bash
+SARVAM_API_KEY=sk_... node examples/sarvam-server.js
+```
+
+How the glossary works: matched terms are swapped for `«N»` placeholders
+before the API call, then restored with your approved rendering afterwards —
+so the engine can never dictionary-translate them. Numbers, currency, and
+anything inside `translate="no"` / `.notranslate` / `data-bhasha-skip`
+(names, emails — PII) are never sent anywhere. Translations are cached in
+`localStorage` per language, so repeat visits are instant and cheap.
+
+Try it locally: open [`demo-custom.html`](./demo-custom.html) via `npm test`'s
+server, or point it at the Sarvam example server.
 
 ## 🧠 Programmatic API
 
@@ -192,9 +237,9 @@ BhashaSwitch.LANGUAGES;           // the full array of supported languages
 ## 🗺️ Roadmap
 
 - [ ] ESM + UMD dual build
-- [ ] Optional glossary / do-not-translate list
+- [x] Optional glossary / do-not-translate list *(custom engine)*
 - [ ] Framework wrappers (`<BhashaSwitch />` React component)
-- [ ] Pluggable engines (DeepL, self-hosted)
+- [x] Pluggable engines *(custom endpoint mode + Sarvam reference server; DeepL et al. work the same way)*
 
 Contributions and issues welcome → [open an issue](https://github.com/vishalmeena2211/bhasha-switch/issues).
 

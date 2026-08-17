@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>bhasha-switch — custom engine (Sarvam) + glossary demo</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 0; background: #f7f7fb; color: #1a1f36; }
+    .hdr { background: #fff; border-bottom: 1px solid #e2e5ea; padding: 18px 24px; }
+    .hdr div div { font-size: 20px; font-weight: 700; }
+    main { max-width: 720px; margin: 24px auto; background: #fff; border: 1px solid #e2e5ea; border-radius: 12px; padding: 24px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+    td, th { text-align: left; padding: 8px 6px; border-bottom: 1px solid #eef0f4; }
+    .grand td { font-weight: 700; }
+    input { padding: 8px 10px; border: 1px solid #e2e5ea; border-radius: 8px; width: 260px; }
+  </style>
+</head>
+<body>
+  <div class="hdr"><div><div>Hotel Property Dashboard</div></div></div>
+  <main>
+    <p>Property performance for this month. Check-in pending for Room 101.</p>
+    <p>GST invoice total and UPI settlement are shown below.</p>
+    <input placeholder="Search bookings by guest name" />
+    <table>
+      <tr><th>Item</th><th>Amount</th></tr>
+      <tr><td>Room charges</td><td>₹9,000.00</td></tr>
+      <tr><td>Food orders</td><td>₹1,250.00</td></tr>
+      <tr class="grand"><td>Total Due</td><td>₹10,250.00</td></tr>
+    </table>
+    <p data-bhasha-skip>Guest: Ramesh Kumar (never translated — PII)</p>
+  </main>
+  <script src="/src/index.js"></script>
+  <script>
+    BhashaSwitch.init({
+      engine: 'custom',
+      translateUrl: '/mock-translate',
+      position: 'top-right',
+      accent: '#6d28d9',
+      glossary: {
+        doNotTranslate: ['GST', 'UPI'],
+        terms: {
+          'Property': { hi: 'प्रॉपर्टी', ta: 'ப்ராபர்ட்டி' },
+          'Check-in': { hi: 'चेक-इन', ta: 'செக்-இன்' }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
